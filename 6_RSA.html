@@ -1,0 +1,60 @@
+
+<html>
+<head><title> RSA Calculator </title></head>
+<body>
+
+<h1 id="heading_1"> Welcome to RSA Algorithm demonstrator </h1><br><br>
+
+<form id="myForm">
+
+<Label id = "enter_1" >Enter the first no : </Label>
+<input type = "number" id = "p" placeholder = "Must be a prime no."><br><br>
+
+<Label id = "enter_2" >Enter the second no : </Label>
+<input type = "number" id = "q" placeholder = "Must be a prime"> <br><br>
+
+<button type="submit" id="sub_but">Calculate</button><br><br>
+
+<Label id = "out_1" >n: </Label>
+<input type="text"  id="n" ><br><br>
+
+<Label id = "out_2" >Φ(n): </Label>
+<input type="text"  id="phi_of_n" ><br><br>
+
+<Label id = "out_3" >e: </Label>
+<input type="text"  id="e" ><br><br><br>
+<input type="button" value="Home" onclick ="back()">
+<input type="button" value="Reset" onclick ="reset()">
+</form>
+<script>
+
+var home = "1_INTERFACE.html"; 
+    function back(){        
+    window.location.href = home;
+                }
+				
+                function reset() {
+            document.getElementById("myForm").reset();
+        }
+
+function get(){
+var q = document.getElementById().value;
+var p = document.getElementById().value;
+var n = p*q;
+var phi_of_n = (p-1) * (q-1);
+var e = e(phi_of_n);
+
+}
+
+function e(phi_of_n) {
+		for(var i = 2;i<phi_of_n;i++) {
+			if(phi_of_n%i==1||phi_of_n%i==0) {
+				e = i;
+				break;				
+			}
+		}
+		}	
+function cal(p , q){}
+</script>
+</body>
+</html>
