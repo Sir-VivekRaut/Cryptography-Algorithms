@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rail Fence Cipher</title>
+
+</head>
+<body>
+    <center>
+    <h1>Rail Fence Cipher Encryption</h1>
+<form  id="myForm">
+    <textarea id="plainText" rows="4" cols="50" placeholder="Enter text to encrypt"></textarea><br><br>
+    <label for="rails">Number of Rails:</label>
+    <input type="number" id="rails" min="2" value="3"><br><br>
+    <input type="button" value="Encrypt" onclick="encrypt()"><br><br>
+    <textarea id="outputText" rows="4" cols="50" readonly placeholder="Cipher Text"></textarea><br><br>
+    <input type="button" value="Home" onclick ="back()">
+    <input type="button" value="Reset" onclick ="reset()">
+</form>
+</center>
+
+<script>
+    var home = "1_INTERFACE.html";
+    function back(){
+    window.location.href = home;   }
+
+    function railFenceEncrypt(text, rails) {
+    const fence = [];
+    for (let i = 0; i < rails; i++) {
+    fence.push(Array(text.length).fill(' '));  }
+    let rail = 0;
+    let direction = 1;
+    for (let i = 0; i < text.length; i++) {
+    fence[rail][i] = text[i];
+    rail += direction;
+    if (rail === 0 || rail === rails - 1) {
+    direction *= -1;   }
+    }
+    let encryptedText = '';
+    let railFencePattern = '';
+    for (let i = 0; i < rails; i++) {
+    encryptedText += fence[i].join('');
+    railFencePattern += fence[i].join('') + '\n';
+    }
+    return [encryptedText, railFencePattern];
+    }
+
+    function encrypt() {
+    const plainText = document.getElementById("plainText").value;
+    const rails = parseInt(document.getElementById("rails").value);
+    const [encryptedText, railFencePattern] = railFenceEncrypt(plainText, rails);
+    document.getElementById("outputText").value = encryptedText;
+    // document.getElementById("railFencePattern").textContent = railFencePattern;
+    }
+
+    function reset() {
+                document.getElementById("myForm").reset();
+            }
+    </script>
+</body>
+</html>
