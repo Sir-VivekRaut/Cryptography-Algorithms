@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VR Algorithm</title>
+</head>
+<body>
+    <form id="inputForm">
+        <label for="msgInput">Enter the massage:</label>
+        <input type="text" id="msgInput" name="msgInput" required><br><br>
+        <label for="keyInput">Enter the key (key should be at least N-1 characters long):</label>
+        <input type="text" id="keyInput" name="keyInput" required><br><br>
+        <button type="submit" onclick ="run()">Encrypt</button><br><br>
+
+        <input type="text" id ="cipher" placeholder = "Cipher Text"><br><br><br>
+        
+        <input type="button" value="Home" onclick ="back()">
+        <input type="button" value="Reset" onclick ="reset()">
+    </form>
+
+    <script>
+        
+    var home = "1_INTERFACE.html"; 
+    function back(){        
+    window.location.href = home;
+                }
+                
+                function reset() {
+            document.getElementById("inputForm").reset();
+            document.getElementById("cipher").reset();
+        }
+
+        function run() {
+
+            var msg1 = document.getElementById("msgInput").value;
+            var key1 = document.getElementById("keyInput").value;
+
+            class VRalgorithm {
+    constructor(msg1, key1) {
+        this.msg2 = msg1;
+        this.key2 = key1;
+        this.Alphabet = "abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ +-*/'{}[]<>|!@#$%&,.+-?`~₹$€¥¢©®™¿§¶×°¬¡^÷¦123456789";
+        this.len1 = msg1.length;
+        this.len2 = key1.length;
+        this.len3 = this.len2;
+        this.cipher1 = "";
+        this.message1 = "";
+    }
+
+    encrypt() {
+        console.log("\nEncryption:");
+        console.log("The Massage is: " + this.msg2);
+
+        var msgIndex = Array(this.len1);
+        var keyIndex = Array(50);
+
+        let i = 0, j = 0, k = 0;
+
+        for (let l = 0; l < this.msg2.length; l++) {
+            msgIndex[l] = this.Alphabet.indexOf(this.msg2.charAt(l));
+        }
+
+        if (this.len2 >= this.len1 - 1) {
+            this.len3 = this.len2;
+
+            for (let n = 0; n < this.key2.length; n++) {
+                keyIndex[n] = this.Alphabet.indexOf(this.key2.charAt(n));
+            }
+        } else {
+            while (this.key2.length < this.len1 - 1) {
+                this.key2 = this.key2.concat(this.key2);
+            }
+
+            this.len3 = this.key2.length;
+
+            for (let n = 0; n < this.len3; n++) {
+                keyIndex[n] = this.Alphabet.indexOf(this.key2.charAt(n));
+            }
+        }
+
+        var cipher = Array(this.len1 + this.len3);
+
+        while (i < this.len1 && j < this.len3) {
+            cipher[k++] = msgIndex[i++];
+            cipher[k++] = keyIndex[j++];
+        }
+
+        while (i < this.len1) {
+            cipher[k++] = msgIndex[i++];
+        }
+
+        while (j < this.len3) {
+            cipher[k++] = keyIndex[j++];
+        }
+
+        for (let m = 0; m < this.len1 + this.len3; m++) {
+            const character = this.Alphabet.charAt(cipher[m]);
+            this.cipher1 += character;
+        }
+
+        this.cipher1 = this.cipher1.substring(4);
+
+        this.cipher1 = this.cipher1.split("").reverse().join("");
+
+       document.getElementById("cipher").display = this.cipher1;
+    }
+
+    } }
+
+
+
+            const vrAlgorithm = new VRalgorithm(msg1, key1);
+            vrAlgorithm.encrypt();
+        
+    </script>
+</body>
+</html>
